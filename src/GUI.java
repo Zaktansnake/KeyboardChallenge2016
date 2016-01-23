@@ -1,4 +1,6 @@
 import java.awt.AWTException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
@@ -32,7 +34,11 @@ public class GUI extends Application implements NativeKeyListener {
         launch(args);
     }
     
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws NativeHookException {
+    	GlobalScreen.registerNativeHook();
+        GlobalScreen.addNativeKeyListener(this);
+        turnOffJNativeLogger();
+        
     	stage = primaryStage;
 	    Scene scene = chooseDifficultyScene(primaryStage);
 	    primaryStage.setTitle(SCENE_TITLE);
@@ -40,7 +46,13 @@ public class GUI extends Application implements NativeKeyListener {
 	    primaryStage.show();
     }
     
-    /**
+    private void turnOffJNativeLogger() {
+		// TODO Auto-generated method stub
+    	Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+        logger.setLevel(Level.OFF);
+	}
+
+	/**
      * Loads up the screen where user has to choose the difficulty of the challenge.
      * 
      * @param primaryStage
@@ -98,7 +110,6 @@ public class GUI extends Application implements NativeKeyListener {
     @Override
     public void nativeKeyPressed(NativeKeyEvent arg0) {
   	   
-  	    boolean isQPressed = arg0.getKeyCode() == NativeKeyEvent.VC_Q;
   	    Easy.process(arg0.getKeyCode());
   	    System.out.print("pressed");
     }

@@ -72,9 +72,10 @@ public class GUI extends Application implements NativeKeyListener {
         });
         
         final GridPane inputGridPane = new GridPane();
-        GridPane.setConstraints(proLevelButton, 0, 0);
-        GridPane.setConstraints(hardLevelButton, 1, 0);
-        GridPane.setConstraints(easyLevelButton, 2, 0);
+        GridPane.setConstraints(challengeDescription, 0, 0);
+        GridPane.setConstraints(proLevelButton, 0, 1);
+        GridPane.setConstraints(hardLevelButton, 1, 1);
+        GridPane.setConstraints(easyLevelButton, 2, 1);
         inputGridPane.setHgap(6);
         inputGridPane.setVgap(6);
         inputGridPane.getChildren().addAll(proLevelButton, hardLevelButton, easyLevelButton);

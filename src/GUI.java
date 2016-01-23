@@ -119,55 +119,18 @@ public class GUI extends Application implements NativeKeyListener {
     		Easy.process(NativeKeyEvent.VC_ESCAPE);
 
     		System.out.println("hello");
-    	} else if(key == NativeKeyEvent.VC_K) {
-    		if(safeCount == 0) {
-    			if(safeWord[0] == key) {
-    				safeCount++;
-    			}
-    		} else {
-    			safeCount = 0;
-    		}
-    	} else if(key == NativeKeyEvent.VC_C) {
-    		if(safeCount == 1) {
-    			if(safeWord[1] == key) {
-    				safeCount++;
-    			}
-    		} else {
-    			safeCount = 0;
-    		}
-    	} else if(key == NativeKeyEvent.VC_2) {
-    		if(safeCount == 2) {
-    			if(safeWord[2] == key) {
-    				safeCount++;
-    			}
-    		} else {
-    			safeCount = 0;
-    		}
-    	} else if(key == NativeKeyEvent.VC_0) {
-    		if(safeCount == 3) {
-    			if(safeWord[3] == key) {
-    				safeCount++;
-    			}
-    		} else {
-    			safeCount = 0;
-    		}
-    	} else if(key == NativeKeyEvent.VC_1) {
-    		if(safeCount == 4) {
-    			if(safeWord[4] == key) {
-    				safeCount++;
-    			}
-    		} else {
-    			safeCount = 0;
-    		}
-    	} else if(key == NativeKeyEvent.VC_6) {
-    		if(safeCount == 5) {
-    			if(safeWord[5] == key) {
-    				System.exit(0);
-    				safeCount++;
-    			}
-    		} else {
-    			safeCount = 0;
-    		}
+    	} else if(key == NativeKeyEvent.VC_K && safeCount == 0 && safeWord[0] == key) {
+    			safeCount++;
+    	} else if(key == NativeKeyEvent.VC_C && safeCount == 1 && safeWord[1] == key) {
+    			safeCount++;
+    	} else if(key == NativeKeyEvent.VC_2 && safeCount == 2 && safeWord[2] == key) {
+    			safeCount++;
+    	} else if(key == NativeKeyEvent.VC_0 && safeCount == 3 && safeWord[3] == key) {
+    			safeCount++;
+    	} else if(key == NativeKeyEvent.VC_1 && safeCount == 4 && safeWord[4] == key) {
+    			safeCount++;
+    	} else if(key == NativeKeyEvent.VC_6 && safeCount == 5 && safeWord[5] == key) {
+    			System.exit(0);
     	} else if(!counter) {
     		if(isPro) {
     			Mindblown.process(key);
@@ -176,9 +139,11 @@ public class GUI extends Application implements NativeKeyListener {
     		} else {	
     		}
             counter = true;
-        } else {
+        } else if (counter){
         	counter = false;
-        }
+        } else {
+			safeCount = 0;
+		}
     }
 
 	@Override

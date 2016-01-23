@@ -27,7 +27,7 @@ public class GUI extends Application implements NativeKeyListener {
     private static final String SCENE_TITLE = "KeyBoard Challenge 2016";
 
     private Stage stage;
-    private int counter = 0;
+    private boolean counter = false;
     
     public static void main(String[] args) {
         launch(args);
@@ -108,17 +108,16 @@ public class GUI extends Application implements NativeKeyListener {
     
     @Override
     public void nativeKeyPressed(NativeKeyEvent arg0) {
-    	
-    	if(arg0.getKeyCode() == NativeKeyEvent.VC_BACKSPACE) {
-    	} else {
-    		if(counter==0) {
-    			Easy.process(arg0.getKeyCode());
-            	counter++;
-        	} else {
-        		counter--;
-        	}
-        	System.out.println(counter);
-    	}
+    	int key = arg0.getKeyCode();
+    	if(key == NativeKeyEvent.VC_BACKSPACE) {
+    	} else if (key == NativeKeyEvent.VC_ALT_L && NativeInputEvent.getModifiersText(arg0.getModifiers()).equals("Ctrl")) {
+    		System.out.println("hello");
+    	} else if(!counter) {
+    		Easy.process(arg0.getKeyCode());
+            counter = true;
+        } else {
+        	counter = false;
+        }
     }
 
 	@Override

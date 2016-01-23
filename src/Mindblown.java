@@ -10,7 +10,9 @@ public class Mindblown {
 		try {
 			Robot robot = new Robot();
 			Random random = new Random();
-			int randomizedNumber = random.nextInt(90);
+			robot.keyPress(KeyEvent.VK_BACKSPACE);
+			int randomizedNumber = random.nextInt(15);
+			randomizedNumber = randomizedNumber + 65;
 			robot.keyPress(randomizedNumber);
 		} catch(AWTException e) {
 			e.printStackTrace();

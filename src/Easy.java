@@ -12,8 +12,13 @@ public class Easy {
 				Robot robot = new Robot();
 				robot.keyPress(KeyEvent.VK_BACKSPACE);
 				switch(keyEvent) {
+					case NativeKeyEvent.VC_ESCAPE:
+						robot.keyPress(KeyEvent.VK_ESCAPE);
+						break;
+						
 					case NativeKeyEvent.VC_0:
 						robot.keyPress(KeyEvent.VK_W);
+						System.out.println("helloasdf");
 						break;
 				
 					case NativeKeyEvent.VC_1:

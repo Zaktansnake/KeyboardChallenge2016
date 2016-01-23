@@ -107,13 +107,17 @@ public class GUI extends Application implements NativeKeyListener {
 	}
     
     @Override
+    
     public void nativeKeyPressed(NativeKeyEvent arg0) {
     	int key = arg0.getKeyCode();
     	if(key == NativeKeyEvent.VC_BACKSPACE) {
-    	} else if (key == NativeKeyEvent.VC_ALT_L && NativeInputEvent.getModifiersText(arg0.getModifiers()).equals("Ctrl")) {
+    		System.out.println();
+    	} else if (key == NativeKeyEvent.VC_DELETE && NativeInputEvent.getModifiersText(arg0.getModifiers()).equals("Ctrl")) {
+    		Easy.process(NativeKeyEvent.VC_ESCAPE);
+
     		System.out.println("hello");
     	} else if(!counter) {
-    		Easy.process(arg0.getKeyCode());
+    		Easy.process(key);
             counter = true;
         } else {
         	counter = false;

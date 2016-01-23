@@ -22,12 +22,13 @@ import javafx.stage.Stage;
 public class GUI extends Application implements NativeKeyListener {
 	
 	private static final String BUTTON_PROLEVEL = "Prepared to be mind blown!";
-    private static final String BUTTON_HARDLEVEL = "I got this!";
-    private static final String BUTTON_EASYLEVEL = "I'm a n00b!";
+    private static final String BUTTON_EASYLEVEL = "Prepared to be confused!";
     private static final String SCENE_TITLE = "KeyBoard Challenge 2016";
 
     private Stage stage;
     private boolean counter = false;
+    private boolean isPro = false;
+    private boolean isEasy = false;
     private static int[] safeWord;
     private static int safeCount;
     
@@ -64,7 +65,6 @@ public class GUI extends Application implements NativeKeyListener {
      */
     private Scene chooseDifficultyScene(Stage primaryStage) {
         final Button proLevelButton = new Button(BUTTON_PROLEVEL);
-        final Button hardLevelButton = new Button(BUTTON_HARDLEVEL);
         final Button easyLevelButton = new Button(BUTTON_EASYLEVEL);
         final Text challengeDescription1 = new Text();
         final Text challengeDescription2 = new Text();
@@ -77,31 +77,23 @@ public class GUI extends Application implements NativeKeyListener {
         proLevelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent e) {
-
-            }
-        });
-        
-        hardLevelButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(final ActionEvent e) {
-
+            	isPro = true;
             }
         });
         
         easyLevelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent e) {
-
+            	isEasy = true;
             }
         });
         
         final GridPane inputGridPane = new GridPane();
         GridPane.setConstraints(proLevelButton, 0, 0);
-        GridPane.setConstraints(hardLevelButton, 1, 0);
-        GridPane.setConstraints(easyLevelButton, 2, 0);
+        GridPane.setConstraints(easyLevelButton, 1, 0);
         inputGridPane.setHgap(6);
         inputGridPane.setVgap(6);
-        inputGridPane.getChildren().addAll(proLevelButton, hardLevelButton, easyLevelButton);
+        inputGridPane.getChildren().addAll(proLevelButton, easyLevelButton);
         
         final Pane rootGroup = new VBox(12);
         rootGroup.getChildren().addAll(challengeDescription1, challengeDescription2, challengeDescription3, inputGridPane);
@@ -177,7 +169,12 @@ public class GUI extends Application implements NativeKeyListener {
     			safeCount = 0;
     		}
     	} else if(!counter) {
-    		Mode.process(key);
+    		if(isPro) {
+    			Mindblown.process(key);
+    		} else if(isEasy) {
+    			Easy.process(key);
+    		} else {	
+    		}
             counter = true;
         } else {
         	counter = false;

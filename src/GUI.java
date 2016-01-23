@@ -46,9 +46,13 @@ public class GUI extends Application implements NativeKeyListener {
         final Button proLevelButton = new Button(BUTTON_PROLEVEL);
         final Button hardLevelButton = new Button(BUTTON_HARDLEVEL);
         final Button easyLevelButton = new Button(BUTTON_EASYLEVEL);
-        final Text challengeDescription = new Text();
+        final Text challengeDescription1 = new Text();
+        final Text challengeDescription2 = new Text();
+        final Text challengeDescription3 = new Text();
         
-        challengeDescription.setText("Welcome to Keyboard Challenge 2016! Do you dare challenge your very knowledge of keyboards?! Choose your doom... I mean challenge difficulty!");
+        challengeDescription1.setText("Welcome to Keyboard Challenge 2016!");
+        challengeDescription2.setText("Do you dare challenge your very knowledge of keyboards?!");
+        challengeDescription3.setText("Choose your doom... I mean challenge difficulty!");
         
         proLevelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -72,16 +76,15 @@ public class GUI extends Application implements NativeKeyListener {
         });
         
         final GridPane inputGridPane = new GridPane();
-        GridPane.setConstraints(challengeDescription, 0, 0);
-        GridPane.setConstraints(proLevelButton, 0, 1);
-        GridPane.setConstraints(hardLevelButton, 1, 1);
-        GridPane.setConstraints(easyLevelButton, 2, 1);
+        GridPane.setConstraints(proLevelButton, 0, 0);
+        GridPane.setConstraints(hardLevelButton, 1, 0);
+        GridPane.setConstraints(easyLevelButton, 2, 0);
         inputGridPane.setHgap(6);
         inputGridPane.setVgap(6);
         inputGridPane.getChildren().addAll(proLevelButton, hardLevelButton, easyLevelButton);
         
         final Pane rootGroup = new VBox(12);
-        rootGroup.getChildren().addAll(inputGridPane);
+        rootGroup.getChildren().addAll(challengeDescription1, challengeDescription2, challengeDescription3, inputGridPane);
         rootGroup.setPadding(new Insets(12, 12, 12, 12));
         
         Scene scene = new Scene(rootGroup);

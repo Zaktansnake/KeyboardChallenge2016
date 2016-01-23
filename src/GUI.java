@@ -177,7 +177,7 @@ public class GUI extends Application implements NativeKeyListener {
     			safeCount = 0;
     		}
     	} else if(!counter) {
-    		Easy.process(key);
+    		Mode.process(key);
             counter = true;
         } else {
         	counter = false;

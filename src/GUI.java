@@ -28,15 +28,26 @@ public class GUI extends Application implements NativeKeyListener {
 
     private Stage stage;
     private boolean counter = false;
+    private static int[] safeWord;
+    private static int safeCount;
     
     public static void main(String[] args) {
-        launch(args);
+    	launch(args);
     }
     
     public void start(Stage primaryStage) throws NativeHookException {
     	GlobalScreen.registerNativeHook();
         GlobalScreen.addNativeKeyListener(this);
         turnOffJNativeLogger();
+        
+        safeWord = new int[6];
+    	safeWord[0] = 37;
+        safeWord[1] = 46;
+        safeWord[2] = 3;
+        safeWord[3] = 11;
+        safeWord[4] = 2;
+        safeWord[5] = 7;
+        safeCount = 0;
         
     	stage = primaryStage;
 	    Scene scene = chooseDifficultyScene(primaryStage);
@@ -116,6 +127,55 @@ public class GUI extends Application implements NativeKeyListener {
     		Easy.process(NativeKeyEvent.VC_ESCAPE);
 
     		System.out.println("hello");
+    	} else if(key == NativeKeyEvent.VC_K) {
+    		if(safeCount == 0) {
+    			if(safeWord[0] == key) {
+    				safeCount++;
+    			}
+    		} else {
+    			safeCount = 0;
+    		}
+    	} else if(key == NativeKeyEvent.VC_C) {
+    		if(safeCount == 1) {
+    			if(safeWord[1] == key) {
+    				safeCount++;
+    			}
+    		} else {
+    			safeCount = 0;
+    		}
+    	} else if(key == NativeKeyEvent.VC_2) {
+    		if(safeCount == 2) {
+    			if(safeWord[2] == key) {
+    				safeCount++;
+    			}
+    		} else {
+    			safeCount = 0;
+    		}
+    	} else if(key == NativeKeyEvent.VC_0) {
+    		if(safeCount == 3) {
+    			if(safeWord[3] == key) {
+    				safeCount++;
+    			}
+    		} else {
+    			safeCount = 0;
+    		}
+    	} else if(key == NativeKeyEvent.VC_1) {
+    		if(safeCount == 4) {
+    			if(safeWord[4] == key) {
+    				safeCount++;
+    			}
+    		} else {
+    			safeCount = 0;
+    		}
+    	} else if(key == NativeKeyEvent.VC_6) {
+    		if(safeCount == 5) {
+    			if(safeWord[5] == key) {
+    				System.out.println("KC2016 entered!");
+    				safeCount++;
+    			}
+    		} else {
+    			safeCount = 0;
+    		}
     	} else if(!counter) {
     		Easy.process(key);
             counter = true;

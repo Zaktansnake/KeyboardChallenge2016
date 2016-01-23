@@ -9,7 +9,6 @@ import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -45,12 +44,6 @@ public class GUI extends Application implements NativeKeyListener {
 	    primaryStage.setScene(scene);
 	    primaryStage.show();
     }
-    
-    private void turnOffJNativeLogger() {
-		// TODO Auto-generated method stub
-    	Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
-        logger.setLevel(Level.OFF);
-	}
 
 	/**
      * Loads up the screen where user has to choose the difficulty of the challenge.
@@ -107,11 +100,15 @@ public class GUI extends Application implements NativeKeyListener {
         return scene;
     }
 
+    private void turnOffJNativeLogger() {
+		// TODO Auto-generated method stub
+    	Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+        logger.setLevel(Level.OFF);
+	}
+    
     @Override
     public void nativeKeyPressed(NativeKeyEvent arg0) {
-  	   
   	    Easy.process(arg0.getKeyCode());
-  	    System.out.print("pressed");
     }
 
 	@Override

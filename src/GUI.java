@@ -1,9 +1,13 @@
+import java.awt.AWTException;
+
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
+import org.jnativehook.NativeInputEvent;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -91,11 +95,56 @@ public class GUI extends Application implements NativeKeyListener {
         return scene;
     }
 
-	@Override
-	public void nativeKeyPressed(NativeKeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void nativeKeyPressed(NativeKeyEvent arg0) {
+  	    // Enable user to start typing whenever the application is open
+  	    if (isVisible) {
+  	      Platform.runLater(new Runnable() {
+  	        @Override
+  	        public void run() {
+  	          setFocusAtCommandBar();
+  	        }
+  	      });
+  	    }
+
+  	    boolean isCtrlSpacePressed =
+  	        arg0.getKeyCode() == NativeKeyEvent.VC_SPACE
+  	            && NativeInputEvent.getModifiersText(arg0.getModifiers()).equals("Ctrl");
+  	
+  	    boolean isCtrlHPressed =
+  	        arg0.getKeyCode() == NativeKeyEvent.VC_H
+  	            && NativeInputEvent.getModifiersText(arg0.getModifiers()).equals("Ctrl");
+  	    
+  	    if (isCtrlSpacePressed && isVisible) { // for hide feature: to hide the program
+  	      hide(stage);
+  	      try {
+  	        tray.add(trayIcon);
+  	      } catch (AWTException e) {
+  	        System.out.println("TrayIcon could not be added.");
+  	      }
+  	      isVisible = false;
+  	    } else if (isCtrlSpacePressed) { // for hide feature: to bring up the program
+  	      Platform.runLater(new Runnable() {
+  	        @Override
+  	        public void run() {
+  	          stage.show();
+  	          tray.remove(trayIcon);
+  	        }
+  	      });
+  	      isVisible = true;
+  	    } else if(isCtrlHPressed && !isHelpOn) { // for help feature: to bring up the help menu
+  	    	isHelpOn = true;
+  	    	Platform.runLater(new Runnable() {
+  	            @Override
+  	            public void run() {
+  	            	helpStage.show();
+  	            }
+  	          });
+  	    } else if(isCtrlHPressed && isHelpOn) { // for help feature: to hide the help menu
+  	    	isHelpOn = false;
+  	    	hide(helpStage);
+  	    }
+    }
 
 	@Override
 	public void nativeKeyReleased(NativeKeyEvent arg0) {

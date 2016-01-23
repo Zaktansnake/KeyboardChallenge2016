@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class GUI extends Application {
@@ -25,7 +24,7 @@ public class GUI extends Application {
     
     public void start(Stage primaryStage) {
     	stage = primaryStage;
-	    Scene scene = chooseFileScene(primaryStage);
+	    Scene scene = chooseDifficultyScene(primaryStage);
 	    primaryStage.setTitle(SCENE_TITLE);
 	    primaryStage.setScene(scene);
 	    primaryStage.show();
@@ -37,8 +36,7 @@ public class GUI extends Application {
      * @param primaryStage
      *            The stage that will be used to display the SmarTask UI
      */
-    private Scene chooseFileScene(Stage primaryStage) {
-        final FileChooser fileChooser = new FileChooser();
+    private Scene chooseDifficultyScene(Stage primaryStage) {
         final Button proLevelButton = new Button(BUTTON_PROLEVEL);
         final Button hardLevelButton = new Button(BUTTON_HARDLEVEL);
         final Button easyLevelButton = new Button(BUTTON_EASYLEVEL);

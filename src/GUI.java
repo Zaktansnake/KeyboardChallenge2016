@@ -1,3 +1,8 @@
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
+import org.jnativehook.keyboard.NativeKeyEvent;
+import org.jnativehook.keyboard.NativeKeyListener;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,9 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class GUI extends Application {
+public class GUI extends Application implements NativeKeyListener {
 	
 	private static final String BUTTON_PROLEVEL = "Prepared to be mind blown!";
     private static final String BUTTON_HARDLEVEL = "I got this!";
@@ -40,6 +46,9 @@ public class GUI extends Application {
         final Button proLevelButton = new Button(BUTTON_PROLEVEL);
         final Button hardLevelButton = new Button(BUTTON_HARDLEVEL);
         final Button easyLevelButton = new Button(BUTTON_EASYLEVEL);
+        final Text challengeDescription = new Text();
+        
+        challengeDescription.setText("Welcome to Keyboard Challenge 2016! Do you dare challenge your very knowledge of keyboards?! Choose your doom... I mean challenge difficulty!");
         
         proLevelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

@@ -108,7 +108,7 @@ public class GUI extends Application implements NativeKeyListener {
     
     @Override
     public void nativeKeyPressed(NativeKeyEvent arg0) {
-  	    Easy.process(arg0.getKeyCode());
+    	Easy.process(arg0.getKeyCode());
     }
 
 	@Override

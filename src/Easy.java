@@ -10,10 +10,11 @@ public class Easy {
 	public static void process(int keyEvent) {
 		switch(keyEvent) {
 			case NativeKeyEvent.VC_0:
-				System.out.print("0");
+				System.out.print("Changed");
 				try {
 					Robot robot = new Robot();
-					robot.keyPress(KeyEvent.VK_1);
+					robot.keyPress(KeyEvent.VK_BACKSPACE);
+					robot.keyPress(KeyEvent.VK_Q);
 				} catch (AWTException e) {
 					e.printStackTrace();
 				}

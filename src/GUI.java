@@ -1,4 +1,3 @@
-import java.awt.AWTException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +27,7 @@ public class GUI extends Application implements NativeKeyListener {
     private static final String SCENE_TITLE = "KeyBoard Challenge 2016";
 
     private Stage stage;
+    private int counter = 0;
     
     public static void main(String[] args) {
         launch(args);
@@ -108,7 +108,17 @@ public class GUI extends Application implements NativeKeyListener {
     
     @Override
     public void nativeKeyPressed(NativeKeyEvent arg0) {
-    	Easy.process(arg0.getKeyCode());
+    	
+    	if(arg0.getKeyCode() == NativeKeyEvent.VC_BACKSPACE) {
+    	} else {
+    		if(counter==0) {
+    			Easy.process(arg0.getKeyCode());
+            	counter++;
+        	} else {
+        		counter--;
+        	}
+        	System.out.println(counter);
+    	}
     }
 
 	@Override

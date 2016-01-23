@@ -90,4 +90,22 @@ public class GUI extends Application implements NativeKeyListener {
         Scene scene = new Scene(rootGroup);
         return scene;
     }
+
+	@Override
+	public void nativeKeyPressed(NativeKeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void nativeKeyReleased(NativeKeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void nativeKeyTyped(NativeKeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }

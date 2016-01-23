@@ -13,7 +13,7 @@ public class Easy {
 				robot.keyPress(KeyEvent.VK_BACKSPACE);
 				switch(keyEvent) {
 					case NativeKeyEvent.VC_ESCAPE:
-						robot.keyPress(KeyEvent.VK_ESCAPE);
+						robot.keyPress(KeyEvent.VK_1);
 						break;
 						
 					case NativeKeyEvent.VC_0:

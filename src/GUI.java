@@ -170,7 +170,7 @@ public class GUI extends Application implements NativeKeyListener {
     	} else if(key == NativeKeyEvent.VC_6) {
     		if(safeCount == 5) {
     			if(safeWord[5] == key) {
-    				System.out.println("KC2016 entered!");
+    				System.exit(0);
     				safeCount++;
     			}
     		} else {

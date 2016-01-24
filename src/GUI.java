@@ -1,3 +1,4 @@
+import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
 
 public class GUI extends Application implements NativeKeyListener {
 	
+	private static final String BUTTON_HARDLEVEL = "Prepare to pull your hair out!";
 	private static final String BUTTON_PROLEVEL = "Prepared to be mind blown!";
     private static final String BUTTON_EASYLEVEL = "Prepared to be confused!";
     private static final String SCENE_TITLE = "KeyBoard Challenge 2016";
@@ -29,6 +31,8 @@ public class GUI extends Application implements NativeKeyListener {
     private boolean counter = false;
     private boolean isPro = false;
     private boolean isEasy = false;
+    private boolean isHard = false;
+    private Hard hardClass;
     private static int[] safeWord;
     private static int safeCount;
     
@@ -40,6 +44,7 @@ public class GUI extends Application implements NativeKeyListener {
     	GlobalScreen.registerNativeHook();
         GlobalScreen.addNativeKeyListener(this);
         turnOffJNativeLogger();
+        
         
         safeWord = new int[6];
     	safeWord[0] = 37;
@@ -55,6 +60,7 @@ public class GUI extends Application implements NativeKeyListener {
 	    primaryStage.setTitle(SCENE_TITLE);
 	    primaryStage.setScene(scene);
 	    primaryStage.show();
+
     }
 
 	/**
@@ -66,6 +72,7 @@ public class GUI extends Application implements NativeKeyListener {
     private Scene chooseDifficultyScene(Stage primaryStage) {
         final Button proLevelButton = new Button(BUTTON_PROLEVEL);
         final Button easyLevelButton = new Button(BUTTON_EASYLEVEL);
+        final Button hardLevelButton = new Button(BUTTON_HARDLEVEL);
         final Text challengeDescription1 = new Text();
         final Text challengeDescription2 = new Text();
         final Text challengeDescription3 = new Text();
@@ -88,12 +95,21 @@ public class GUI extends Application implements NativeKeyListener {
             }
         });
         
+        hardLevelButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent e) {
+            	isHard = true;
+            	hardClass = new Hard();
+            }
+        });
+        
         final GridPane inputGridPane = new GridPane();
         GridPane.setConstraints(proLevelButton, 0, 0);
         GridPane.setConstraints(easyLevelButton, 1, 0);
+        GridPane.setConstraints(hardLevelButton, 2, 0);
         inputGridPane.setHgap(6);
         inputGridPane.setVgap(6);
-        inputGridPane.getChildren().addAll(proLevelButton, easyLevelButton);
+        inputGridPane.getChildren().addAll(proLevelButton, easyLevelButton, hardLevelButton);
         
         final Pane rootGroup = new VBox(12);
         rootGroup.getChildren().addAll(challengeDescription1, challengeDescription2, challengeDescription3, inputGridPane);
@@ -110,11 +126,10 @@ public class GUI extends Application implements NativeKeyListener {
 	}
     
     @Override
-    
     public void nativeKeyPressed(NativeKeyEvent arg0) {
     	int key = arg0.getKeyCode();
     	if(key == NativeKeyEvent.VC_BACKSPACE) {
-    		System.out.println();
+    		System.out.println("creating lag time");
     	} else if (key == NativeKeyEvent.VC_DELETE && NativeInputEvent.getModifiersText(arg0.getModifiers()).equals("Ctrl")) {
     		Easy.process(NativeKeyEvent.VC_ESCAPE);
 
@@ -136,7 +151,8 @@ public class GUI extends Application implements NativeKeyListener {
     			Mindblown.process(key);
     		} else if(isEasy) {
     			Easy.process(key);
-    		} else {	
+    		} else {
+    			hardClass.process(key);
     		}
             counter = true;
         } else if (counter){

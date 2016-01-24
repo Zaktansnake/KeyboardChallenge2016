@@ -18,7 +18,6 @@ public class Easy {
 						
 					case NativeKeyEvent.VC_0:
 						robot.keyPress(KeyEvent.VK_W);
-						System.out.println("helloasdf");
 						break;
 				
 					case NativeKeyEvent.VC_1:
@@ -140,7 +139,11 @@ public class Easy {
 					case NativeKeyEvent.VC_U:
 						robot.keyPress(KeyEvent.VK_8);
 						break;
-						
+					
+					case NativeKeyEvent.VC_V:
+						robot.keyPress(KeyEvent.VK_2);
+						break;
+					
 					case NativeKeyEvent.VC_W:
 						robot.keyPress(KeyEvent.VK_Q);
 						break;

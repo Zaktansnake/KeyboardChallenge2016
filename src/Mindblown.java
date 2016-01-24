@@ -16,6 +16,7 @@ public class Mindblown {
 			robot.keyPress(randomizedNumber);
 		} catch(AWTException e) {
 			e.printStackTrace();
+			
 		}
 	}
 }

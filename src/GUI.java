@@ -91,6 +91,7 @@ public class GUI extends Application implements NativeKeyListener {
             @Override
             public void handle(final ActionEvent e) {
             	isPro = true;
+            	stage.hide();
             }
         });
         
@@ -98,6 +99,7 @@ public class GUI extends Application implements NativeKeyListener {
             @Override
             public void handle(final ActionEvent e) {
             	isEasy = true;
+            	stage.hide();
             }
         });
         
@@ -106,6 +108,7 @@ public class GUI extends Application implements NativeKeyListener {
             public void handle(final ActionEvent e) {
             	isHard = true;
             	hardClass = new Hard();
+            	stage.hide();
             }
         });
         

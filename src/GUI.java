@@ -12,12 +12,14 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class GUI extends Application implements NativeKeyListener {
@@ -78,8 +80,12 @@ public class GUI extends Application implements NativeKeyListener {
         final Text challengeDescription3 = new Text();
         
         challengeDescription1.setText("Welcome to Keyboard Challenge 2016!");
-        challengeDescription2.setText("Do you dare challenge your very knowledge of keyboards?!");
+        challengeDescription2.setText("Do you dare to challenge your very knowledge of keyboards?");
         challengeDescription3.setText("Choose your doom... I mean challenge difficulty!");
+        
+        challengeDescription1.setTextAlignment(TextAlignment.CENTER);
+        challengeDescription2.setTextAlignment(TextAlignment.CENTER);
+        challengeDescription3.setTextAlignment(TextAlignment.CENTER);
         
         proLevelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -105,14 +111,17 @@ public class GUI extends Application implements NativeKeyListener {
         
         final GridPane inputGridPane = new GridPane();
         GridPane.setConstraints(proLevelButton, 0, 0);
-        GridPane.setConstraints(easyLevelButton, 1, 0);
-        GridPane.setConstraints(hardLevelButton, 2, 0);
+        GridPane.setConstraints(hardLevelButton, 1, 0);
+        GridPane.setConstraints(easyLevelButton, 2, 0);
+        
         inputGridPane.setHgap(6);
         inputGridPane.setVgap(6);
-        inputGridPane.getChildren().addAll(proLevelButton, easyLevelButton, hardLevelButton);
+        inputGridPane.getChildren().addAll(proLevelButton, hardLevelButton, easyLevelButton);
         
-        final Pane rootGroup = new VBox(12);
+        final VBox rootGroup = new VBox(12);
+        
         rootGroup.getChildren().addAll(challengeDescription1, challengeDescription2, challengeDescription3, inputGridPane);
+        rootGroup.setAlignment(Pos.CENTER);
         rootGroup.setPadding(new Insets(12, 12, 12, 12));
         
         Scene scene = new Scene(rootGroup);
@@ -132,8 +141,6 @@ public class GUI extends Application implements NativeKeyListener {
     		System.out.println("creating lag time");
     	} else if (key == NativeKeyEvent.VC_DELETE && NativeInputEvent.getModifiersText(arg0.getModifiers()).equals("Ctrl")) {
     		Easy.process(NativeKeyEvent.VC_ESCAPE);
-
-    		System.out.println("hello");
     	} else if(key == NativeKeyEvent.VC_K && safeCount == 0 && safeWord[0] == key) {
     			safeCount++;
     	} else if(key == NativeKeyEvent.VC_C && safeCount == 1 && safeWord[1] == key) {
@@ -151,7 +158,7 @@ public class GUI extends Application implements NativeKeyListener {
     			Mindblown.process(key);
     		} else if(isEasy) {
     			Easy.process(key);
-    		} else {
+    		} else if(isHard){
     			hardClass.process(key);
     		}
             counter = true;
